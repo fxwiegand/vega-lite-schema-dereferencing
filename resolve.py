@@ -1,46 +1,5 @@
 import copy
 
-from dollar_ref import pluck
-
-
-def test_deref():
-    example = {
-        'some': 'thing',
-        'sub-document': {
-            'we-do-not': 'need-this',
-            'go-deeper': 'than-this',
-            'need-recursion': {
-                'more-awesome': 'data',
-                'we': {
-                    'could': {
-                        'need': {
-                            '$ref': '#/sub-document/need-recursion',
-                        }
-                    }
-                }
-            },
-            'target': {
-                'awesome': 'data',
-                'we': [
-                    {
-                        '$ref': '#/sub-document/we-do-not'
-                    },
-                    {
-                        'might': {
-                            'use': {
-                                '$ref': '#/sub-document/go-deeper',
-                            }
-                        }
-                    }
-                ]
-            }
-        }
-    }
-
-    no_recursion = remove_recursive_definitions(example)
-    print(no_recursion)
-    print(resolve_json(example))
-
 
 def resolve_json(json):
     def resolve_ref(obj, ref_path):
