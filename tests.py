@@ -16,7 +16,37 @@ class TestJsonResolver(unittest.TestCase):
         result = remove_recursive_definitions(schema)
         self.assertEqual(result, expected_result)
 
-    def test_remove_recursive_definitions2(self):
+    def test_remove_recursive_definitions_2(self):
+        schema = {
+            'definitions': {
+                'anotherDefinition': {
+                    "type": "string"
+                },
+                'some': {
+                    'nesting': {
+                        '$ref': '#/definitions/anotherDefinition',
+                    }
+                }
+            }
+        }
+
+        expected = {
+            'definitions': {
+                'anotherDefinition': {
+                    "type": "string"
+                },
+                'some': {
+                    'nesting': {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+
+        result = resolve_json(schema)
+        self.assertEqual(result, expected)
+
+    def test_resolve_json_2(self):
         schema = {
             'definitions': {
                 'anotherDefinition': {
