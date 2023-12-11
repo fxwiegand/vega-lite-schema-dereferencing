@@ -1,5 +1,5 @@
 import json
-from resolve import resolve_json, test_deref, remove_recursive_definitions
+from resolve import resolve_json, remove_recursive_definitions
 import httpx
 
 
